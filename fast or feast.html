@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fasting Period Check</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://wp.en.aleteia.org/wp-content/uploads/sites/2/2016/12/web-coptic-monk-cross-mark-fischer-cc.jpg?w=640&crop=1');
+  background-repeat: no-repeat;
+  background-size: 1000px 950px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    text-align: center;
+    background-color: #c0bebe;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    color: #333;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #food-image {
+    width: 200px;
+    height: 225px;
+    margin-top: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  #message {
+    margin-top: 10px;
+    color: #777;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>What Should You Eat Today?</h1>
+  <button onclick="displayFood()">Find Out</button>
+  <br>
+  <img id="food-image" src="" alt="Food Image">
+  <div id="message"></div>
+</div>
+
+<script>
+// Define the fasting periods including Wednesdays and Fridays
+const fastingPeriods = [
+  { name: "Jonah's (Nineveh) Fast", start: new Date(2024, 1, 26), end: new Date(2024, 1, 28) },
+  { name: "Holy Great Fast", start: new Date(2024, 2, 11), end: new Date(2024, 3, 26) },
+  { name: "Lazarus Saturday", start: new Date(2024, 3, 27), end: new Date(2024, 3, 27) },
+  { name: "Entry of our Lord into Jerusalem (Hosanna Sunday)", start: new Date(2024, 3, 28), end: new Date(2024, 3, 28) },
+  { name: "Holy Pascha", start: new Date(2024, 3, 29), end: new Date(2024, 4, 1) },
+  { name: "Covenant Thursday", start: new Date(2024, 4, 2), end: new Date(2024, 4, 2) },
+  { name: "Good Friday", start: new Date(2024, 4, 3), end: new Date(2024, 4, 3) },
+  { name: "The Apostles' Fast", start: new Date(2024, 5, 24), end: new Date(2024, 6, 11) },
+  { name: "St. Mary's Fast", start: new Date(2024, 7, 7), end: new Date(2024, 7, 21) }  
+];
+
+// Get today's date
+const today = new Date();
+
+// Check if today is Wednesday or Friday
+const isWednesdayOrFriday = today.getDay() === 3 || today.getDay() === 5; // 3 represents Wednesday, 5 represents Friday
+
+// Check if today falls within any fasting period or if it's Wednesday or Friday
+const isFastingDay = fastingPeriods.some(period => today >= period.start && today <= period.end) || isWednesdayOrFriday;
+
+// Function to display food based on fasting status
+function displayFood() {
+  const foodImage = document.getElementById('food-image');
+  const message = document.getElementById('message');
+  if (isFastingDay) {
+    foodImage.src = 'https://tastythriftytimely.com/wp-content/uploads/2023/06/Falafel-Pita-FEATURED.jpg'; // Replace 'falafel.jpg' with the path to your falafel image
+    foodImage.alt = "Falafel";
+    message.textContent = "We are fasting habibi";
+  } else {
+    foodImage.src = 'https://i.ytimg.com/vi/4K_dt5jf9j8/maxresdefault.jpg'; // Replace 'ice_cream.jpg' with the path to your ice cream image
+    foodImage.alt = "Ice Cream";
+    message.textContent = "We are not fasting today habibi. Enjoy!";
+  }
+}
+</script>
+
+</body>
+  
+</html>
